@@ -6,20 +6,19 @@ namespace Utilities.ConsoleUI
     {
         private string title;
         private string subtitle;
-        private string selectionIndicator = GlobalVariables.SelectionIndicator;
+        private string selectionIndicator = " > ";
 
         private int screenWidth;
         private int screenHeight;
         private int halfRows;
 
-        private int rowLength = GlobalVariables.rowLength;
-        private ConsoleColor highlightColor = GlobalVariables.highlightColor;
-        private ConsoleColor textColor = GlobalVariables.textColor;
-        private ConsoleColor borderColor = GlobalVariables.borderColor;
-        private ConsoleColor titleHighlightColor = GlobalVariables.titleHighlightColor;
+        public const int rowLength = 60;
 
-        public Display(string title, int rows)
+        private MenuColors menuColors;
+
+        public Display(string title, int rows, MenuColors menuColors)
         {
+            this.menuColors = menuColors;
             screenWidth = Console.WindowWidth;
             screenHeight = Console.WindowHeight;
             this.title = title;

@@ -6,25 +6,26 @@ namespace Utilities.ConsoleUI
     public class Menu
     {
         private int totalRows;
+        private MenuColors menuColors;
 
         private string title;
         private List<IMenuItem> menuItems = new List<IMenuItem>();
         private MenuInput input = new MenuInput();
 
         private readonly string subtitle = "USE ARROWS KEYS TO NAVIGATE | PRESS ENTER TO SELECT";
-        private readonly int rowLength = GlobalVariables.rowLength;
         private readonly int defaultRows = 3;
 
-        public Menu(List<IMenuItem> menuItems, string menuTitle)
+        public Menu(List<IMenuItem> menuItems, string menuTitle, ColorPreset colorPreset)
         {
             this.menuItems = menuItems;
             title = menuTitle;
+            menuColors = new MenuColors(colorPreset);
         }
 
         public void Display()
         {
             totalRows = menuItems.Count + defaultRows;
-            var display = new Display(title, totalRows);
+            var display = new Display(title, totalRows, menuColors);
             display.MenuList(subtitle);
             PrintMenuItems(display); 
         }
@@ -44,7 +45,7 @@ namespace Utilities.ConsoleUI
             for (int i = 0; i < menuItems.Count; i++)
             {
                 var yOffset = i + defaultRows;
-                Console.SetCursorPosition(Console.WindowWidth / 2 - rowLength / 2, Console.WindowHeight / 2 - totalRows / 2 + yOffset);
+                Console.SetCursorPosition(Console.WindowWidth / 2 - display.rowLength / 2, Console.WindowHeight / 2 - totalRows / 2 + yOffset);
                 display.PrintMenuItem(menuItems[i].Title(), i == input.selectionItem);
             }
         }
