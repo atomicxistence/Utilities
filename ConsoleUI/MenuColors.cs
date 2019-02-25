@@ -7,6 +7,7 @@ namespace Utilities.ConsoleUI
         Cyberpunk,
         Sprite,
         Monochrome,
+        Patriotic,
     }
 
     public class MenuColors
@@ -27,9 +28,9 @@ namespace Utilities.ConsoleUI
                     TitleHighlight = ConsoleColor.DarkMagenta;
                 break;
                 case ColorPreset.Sprite:
-                    Hightlight = ConsoleColor.Yellow;
+                    Hightlight = ConsoleColor.Green;
                     Text = ConsoleColor.Black;
-                    Border = ConsoleColor.Green;
+                    Border = ConsoleColor.DarkGreen;
                     TitleHighlight = ConsoleColor.DarkYellow;
                 break;
                 case ColorPreset.Monochrome:
@@ -38,6 +39,13 @@ namespace Utilities.ConsoleUI
                     Border = ConsoleColor.DarkGray;
                     TitleHighlight = ConsoleColor.DarkGray;
                 break;
+                case ColorPreset.Patriotic:
+                    Hightlight = ConsoleColor.Red;
+                    Text = ConsoleColor.White;
+                    Border = ConsoleColor.DarkBlue;
+                    TitleHighlight = ConsoleColor.Blue;
+                    break;
+
             }
         }
     }

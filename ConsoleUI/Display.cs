@@ -12,17 +12,17 @@ namespace Utilities.ConsoleUI
         private int screenHeight;
         private int halfRows;
 
-        public const int rowLength = 60;
+        private MenuColors menuColor;
 
-        private MenuColors menuColors;
+        public readonly int rowLength = 60;
 
-        public Display(string title, int rows, MenuColors menuColors)
+        public Display(string title, int rows, ColorPreset colorPreset)
         {
-            this.menuColors = menuColors;
             screenWidth = Console.WindowWidth;
             screenHeight = Console.WindowHeight;
             this.title = title;
             halfRows = (rows + 1) / 2;
+            menuColor = new MenuColors(colorPreset);
         }
 
         public void MenuList(string subtitle)
@@ -75,8 +75,8 @@ namespace Utilities.ConsoleUI
         {
             if (isCurrentlySelected)
             {
-                Console.BackgroundColor = highlightColor;
-                Console.ForegroundColor = textColor;
+                Console.BackgroundColor = menuColor.Hightlight;
+                Console.ForegroundColor = menuColor.Text;
                 Console.Write(selectionIndicator);
                 Console.Write(itemName);
                 PrintEmptySpaceFill(rowLength - (itemName.Length + selectionIndicator.Length));
@@ -92,7 +92,7 @@ namespace Utilities.ConsoleUI
 
         private void PrintBorder()
         {
-            Console.ForegroundColor = borderColor;
+            Console.ForegroundColor = menuColor.Border;
 
             //Top Border
             Console.SetCursorPosition(screenWidth / 2 - rowLength / 2, screenHeight / 2 - halfRows - 1);
@@ -123,8 +123,8 @@ namespace Utilities.ConsoleUI
         private void PrintTitle()
         {
             Console.SetCursorPosition(screenWidth / 2 - rowLength / 2, screenHeight / 2 - halfRows);
-            Console.BackgroundColor = titleHighlightColor;
-            Console.ForegroundColor = textColor;
+            Console.BackgroundColor = menuColor.TitleHighlight;
+            Console.ForegroundColor = menuColor.Text;
             //variable to control the centering if the title is an odd number of characters
             var leftAlignCenter = (rowLength / 2) - (title.Length / 2);
             PrintEmptySpaceFill(leftAlignCenter);
@@ -136,7 +136,7 @@ namespace Utilities.ConsoleUI
         private void PrintSubtitle()
         {
             Console.SetCursorPosition(screenWidth / 2 - rowLength / 2, screenHeight / 2 - halfRows + 1);
-            Console.ForegroundColor = titleHighlightColor;
+            Console.ForegroundColor = menuColor.TitleHighlight;
             var leftAlignCenter = (rowLength / 2) - (subtitle.Length / 2);
             PrintEmptySpaceFill(leftAlignCenter);
             Console.Write(subtitle);

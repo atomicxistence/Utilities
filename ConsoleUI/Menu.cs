@@ -6,7 +6,7 @@ namespace Utilities.ConsoleUI
     public class Menu
     {
         private int totalRows;
-        private MenuColors menuColors;
+        private ColorPreset colorPreset;
 
         private string title;
         private List<IMenuItem> menuItems = new List<IMenuItem>();
@@ -19,13 +19,13 @@ namespace Utilities.ConsoleUI
         {
             this.menuItems = menuItems;
             title = menuTitle;
-            menuColors = new MenuColors(colorPreset);
+            this.colorPreset = colorPreset;
         }
 
         public void Display()
         {
             totalRows = menuItems.Count + defaultRows;
-            var display = new Display(title, totalRows, menuColors);
+            var display = new Display(title, totalRows, colorPreset);
             display.MenuList(subtitle);
             PrintMenuItems(display); 
         }
